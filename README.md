@@ -10,3 +10,8 @@ CloudVM-v1.0
 
 8-4-2015
 - Penambahan hlmn aboutus.html serta perubahan kecil pada index.html dan login.html
+
+8-4-2015
+- Edit konten
+- Manage.html 
+- AngularJS masih dalam pengembangan

@@ -4,3 +4,6 @@ CloudVM front end
 CloudVM-v1.0 
 - CSS & Bootstrap only
 - AngularJS masih dalam pengembangan
+
+7-4-2015
+- Penambahan smoothscrolling pada button index.html

@@ -12,7 +12,26 @@
 <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
 <script src="js/modernizr.js"></script>
 <script src="js/jquery-1.9.0.min.js"></script>
+<script>
+$(document).ready(function () 
+{
+       if( (document.cookie).substring(11) == "" )
+       {
+          window.location.href = "error.html";
+       }
+       else
+       {
+        var user = (document.cookie).substring(11);
+         document.getElementById("userid").innerHTML = user;
+         $('#submit').click(function(){
+                    document.cookie = "";
+                    window.location.href = "login.html";
+        });
 
+       }       
+
+});
+</script>
 </head>
 <body>
 
@@ -28,8 +47,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="manage.html">Username</a></li>
-        <li><a href="#">Sign Out</a></li>
+        <li><a id="userid"></a></li>
       </ul>
       </li>
       </ul>
@@ -47,6 +65,13 @@
       <h1>Manage Your Instance</h1>
       <br/>
     </div>
+      <form>
+          <div class="form-group">
+            <p>
+              <input id="submit" class="btn btn-success center-block" type="button" value="Logout" />
+            </p>
+            <span class="loading"></span> </div>
+          </form>
   </div>
   <HR>
   <div class="row">    
@@ -76,18 +101,16 @@
             </tbody>
           </table>
           
+
           <div class="btn-group" role="group">
-          
-          <div class="btn-group role="group">
-            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Action
-            <span class="caret"></span></button>
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+            Action<span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
               <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Start</a></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Stop</a></li>
             </ul>
           </div>
           <button class="btn btn-primary"> Add <span class="fa fa-plus" aria-hidden="true"></span></button>
-          </div>
   </div>
 </div>
 

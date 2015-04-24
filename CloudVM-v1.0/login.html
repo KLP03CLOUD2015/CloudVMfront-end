@@ -13,6 +13,32 @@
 <script src="js/modernizr.js"></script>
 <script src="js/jquery-1.9.0.min.js"></script>
 
+<script>
+$(document).ready(function () 
+{
+       console.log("loaded");
+       
+       $('#submit').click(function(){
+               $.ajax({
+                 contentType: 'application/json',
+                 dataType: 'json',
+                 url: "http://localhost:8183/user/login",
+                 type:'POST',
+                 data: JSON.stringify({ username: $("#email").val(), password: $("#password").val() }),
+                 complete: function(results){
+                      var data = JSON.parse(results.responseText);
+                      $.each(data,function(index){
+                      });
+                      var user = document.getElementById("email").value;
+                      document.cookie = user;
+                      window.location.href = "manage.html";
+                  }
+                  });
+        });
+        //console.log("its here3");
+});
+</script>
+
 </head>
 <body>
 
@@ -73,7 +99,7 @@
         <br/>  
         <div class="form-group">
           <p>
-            <input class="btn btn-success btn-lg center-block" type="submit" value="Login" />
+            <input id="submit" class="btn btn-success btn-lg center-block" type="button" value="Login" />
           </p>
           <span class="loading"></span> </div>
       </form>
@@ -84,5 +110,6 @@
 <!--==============BOOTSTRAP JS=================--> 
 
 <script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>

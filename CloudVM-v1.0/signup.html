@@ -12,7 +12,29 @@
 <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
 <script src="js/modernizr.js"></script>
 <script src="js/jquery-1.9.0.min.js"></script>
+<script>
+$(document).ready(function () 
+{
 
+       console.log("loaded");
+       $('#submit').click(function(){
+               $.ajax({
+                 contentType: 'application/json',
+                 dataType: 'json',
+                 url: "http://localhost:8183/user/register",
+                 type:'POST',
+                 data: JSON.stringify({ nama: $("#name").val() , email: $("#email").val() , password: $("#password").val() , no_telp: $("#phoneNumber").val() , nama_perusahaan: $("#companyName").val() , alamat: $("#address").val() , nama_cc: $("#ccName").val() , alamat_cc: $("#ccAddress").val() , nomor_cc: $("#ccNumber").val() , nomor_vcv: $("#cvc").val() , bulan_expire: $("#ccMonth").val() , tahun_expire:$("#ccYear").val() }),
+                 complete: function(results){
+                      var data = JSON.parse(results.responseText);
+                      $.each(data,function(index){
+                      });
+                      $('input[type="password"],textarea').val('');
+                      $('input[type="text"],textarea').val('');
+                  }
+                  });
+        });
+}); 
+</script>
 </head>
 <body>
 
@@ -165,7 +187,7 @@
         <HR>
         <div class="form-group">
           <p>
-            <input class="btn btn-success btn-lg center-block" type="submit" value="Submit" />
+            <input id="submit" class="btn btn-success btn-lg center-block" type="button" value="Submit" />
           </p>
           <span class="loading"></span> 
         </div>

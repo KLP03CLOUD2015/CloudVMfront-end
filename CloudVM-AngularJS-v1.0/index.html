@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CloudVM - Your Trusted Cloud Partner in Business</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="css/hosting.css" rel="stylesheet" media="all">
+
+<!-- AngularJS -->
+<!-- <script src="js/angular.min.js"></script> -->
+<script data-require="angular.js@1.2.22" data-semver="1.2.22" src="https://code.angularjs.org/1.2.22/angular.js"></script>
+<script src="https://code.angularjs.org/1.2.20/angular-route.js"></script>
+<script src="script.js"></script>
+
+<!-- More JS & CSS for layout -->
+<script src="js/modernizr.js"></script>
+<link rel="stylesheet" href="css/flexslider.css" />
+<script src="js/jquery-1.9.0.min.js"></script>
+<script src="js/jquery.flexslider.js"></script>
+<script type="text/javascript">
+  $(window).load(function() {
+     $('.flexslider').flexslider({
+        animation: "slide",
+		useCSS: Modernizr.touch
+      });
+	  
+		  $('.scrollbtn').click(function() {
+		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+		  var target = $(this.hash);
+		  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		  if (target.length) {
+			$('html,body').animate({
+			  scrollTop: target.offset().top - 80
+			}, 1000);
+			return false;
+		  }
+		}
+	  });
+  });
+</script>
+
+</head>
+
+<body ng-app="myApp" ng-controller="RouteCtrl" id="home" data-spy="scroll" data-target=".navbar-collapse" data-offset="100">
+
+<div ng-view=""></div>
+
+<!--===Back to top======--> 
+<a href="#" class="scrollup">Scroll</a> 
+
+<script src="js/jquery.easing.1.2.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+
+<!--==========ONE PAGE SCROLLING SCRIPTS STARTS===============--> 
+
+<script>
+            $(function() {
+                $('.nav li a').bind('click',function(event){
+                    var $anchor2 = $(this).parent();
+				    var $anchor = $(this);
+					$('.nav  li').removeClass('active');
+                    $anchor2.addClass('active');
+					
+                    $('html, body').stop().animate({
+                        scrollTop: $($anchor.attr('href')).offset().top - 80
+                    }, 1500,'easeInOutExpo');
+                    event.preventDefault();
+                });
+            });
+        </script> 
+
+<!--=============ONE PAGE SCROLLING SCRIPTS ENDS============--> 
+
+<!--=============BACK TO TOP STARTS============--> 
+
+<script>
+    $(document).ready(function(){ 
+ 
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 800) {
+                $('.scrollup').fadeIn();
+            } else {
+                $('.scrollup').fadeOut();
+            }
+        }); 
+ 
+        $('.scrollup').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+ 
+    });
+</script> 
+
+<!--=============BACK TO TOP ENDS============-->
+
+</body>
+</html>

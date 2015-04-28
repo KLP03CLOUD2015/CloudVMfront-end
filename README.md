@@ -37,3 +37,6 @@ CloudVM-v1.0
   2. Ketika features dan pricing pada navbar dipilih, dan membuka views sesuai dengan route /features dan /pricing seharusnya active link pada navbar juga beruba mengikuti halaman yang sedang aktif
     * NB: untuk kedua problem diatas kalau bisa dibetulkan dengan tetap menggunakan satu navbar, yaitu navbar_global, jalan terakhir ya dibuatkan dua navbar khusus halaman features dan pricing, tapi sementara coba pakai satu navbar
 - Untuk development AngularJS harus pada **http://localhost**, pakai XAMPP dulu saja kalau belum butuh menggunakan service pada server.js
+
+28-4-2015 **(CloudVM-AngularJS-v1.1)**
+- Seadanya yang udah sukses diangularin

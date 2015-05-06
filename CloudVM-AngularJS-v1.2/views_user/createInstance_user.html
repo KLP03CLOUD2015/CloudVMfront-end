@@ -1,0 +1,65 @@
+
+<!--============== Create Instance ==============-->
+
+<div class="container sign-in-up" id="contact" ng-controller="InstanceController as IC" ng-init="IC.getInstanceList()">
+  <div class="row PageHead">
+    <div class="col-md-12">
+      <h1>Create Instance</h1>
+      <br/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <HR>
+      <form class="form" id="loginForm">
+
+        <label>Choose Your Plan:</label>
+        <div class="form-group form-group-lg"> 
+          <select ng-init="getInstanceList()" class="form-control" id="plan" name="plan">
+            <option>Nothing Selected</option>
+            <option>Large 1</option>
+            <option>Large 2</option>
+            <option>Medium 1</option>
+            <option>Medium 2</option>
+            <option>Small 1</option>
+            <option>Small 2</option>
+          </select>
+        </div>
+
+        <label>Operating System:</label>
+        <div class="form-group form-group-lg"> 
+        <select class="form-control" id="OS" name="OS">
+          <option>Nothing Selected</option>
+          <option>Ubuntu</option>
+          <option>Debian</option>
+          <option>CentOs</option>
+        </select>
+        </div>
+
+        <label>Instance Name:</label>
+        <div class="form-group form-group-lg">
+          <div class="right-inner-addon">
+            <i class="fa fa-font"></i>
+            <input class="form-control" type="text" placeholder="Instance Name" name="instanceName" id="instanceName">
+          </div>
+        </div>
+
+        <label>Private Key Name:</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Private Key Name" name="prKeyName" id="prKeyName">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">Generate</button>
+          </span>
+        </div>
+
+        <HR>
+        <br/>  
+        <div class="form-group">
+          <p>
+            <button ng-click="createInstance()" id="submit" class="btn btn-success btn-lg center-block" type="submit">Create</button>
+          </p>
+          <span class="loading"></span> </div>
+      </form>
+  </div>
+  </div>
+</div>

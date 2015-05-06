@@ -40,3 +40,7 @@ CloudVM-v1.0
 
 28-4-2015 **(CloudVM-AngularJS-v1.1)**
 - Seadanya yang udah sukses diangularin
+
+6-5-2015 **(CloudVM-AngularJS-v1.2)**
+- Pembagian tugas: http://bit.ly/front-cloudvm
+- *Deadline: Sabtu, 9 Mei 2015*

@@ -1,0 +1,54 @@
+
+<!--============== Create Instance ==============-->
+
+<div class="container sign-in-up" id="contact" ng-controller="InstanceController as IC" ng-init="IC.getInstanceList()">
+  <div class="row PageHead">
+    <div class="col-md-12">
+      <h1>Create Instance</h1>
+      <br/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <HR>
+      <form class="form" id="loginForm">
+
+        <label>Choose Your Plan:</label>
+        <div class="form-group form-group-lg"> 
+          <select ng-init="getInstanceList()" class="form-control" id="plan" name="plan" ng-model="instanceData.id_plan" ng-options="b.id_plan as b.description for b in plans">
+          </select>
+        </div>
+
+        <label>Operating System:</label>
+        <div class="form-group form-group-lg"> 
+        <select class="form-control" id="OS" name="OS" ng-model="instanceData.os" ng-options="a.os as a.description for a in oses">
+        </select>
+        </div>
+
+        <label>Instance Name:</label>
+        <div class="form-group form-group-lg">
+          <div class="right-inner-addon">
+            <i class="fa fa-font"></i>
+            <input class="form-control" type="text" placeholder="Instance Name" name="instanceName" id="instanceName" ng-model="instanceData.nama_instance">
+          </div>
+        </div>
+
+        <label>Private Key Name:</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Private Key Name" name="prKeyName" id="prKeyName">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">Generate</button>
+          </span>
+        </div>
+
+        <HR>
+        <br/>  
+        <div class="form-group">
+          <p>
+            <button ng-click="createInstance()" id="submit" class="btn btn-success btn-lg center-block" type="submit">Create</button>
+          </p>
+          <span class="loading"></span> </div>
+      </form>
+  </div>
+  </div>
+</div>

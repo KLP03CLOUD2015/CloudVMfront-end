@@ -1,0 +1,33 @@
+
+<!--============== Create Instance ==============-->
+
+<div class="container sign-in-up" id="contact" ng-controller="InstanceController as IC" ng-init="IC.getInstanceList()">
+  <div class="row PageHead">
+    <div class="col-md-12">
+      <h1>Edit Instance</h1>
+      <br/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <HR>
+      <form class="form" id="loginForm">
+        <label>Name: </label>
+        <div class="form-group form-group-lg"> 
+          <div class="right-inner-addon">
+            <i class="fa fa-font"></i>
+            <input class="form-control" type="text" placeholder="Instance Name" name="instanceName" id="instanceName">
+          </div>
+        </div>
+
+        <HR>
+        <br/>  
+        <div class="form-group">
+          <p>
+            <button ng-click="createInstance()" id="submit" class="btn btn-success btn-lg center-block" type="submit">Save</button>
+          </p>
+          <span class="loading"></span> </div>
+      </form>
+  </div>
+  </div>
+</div>

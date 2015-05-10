@@ -126,9 +126,10 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
   
   $scope.formData = {};
   $scope.user = {};
+  $scope.loggedUserProfile = {};
   $scope.loggedUser = {
-    //id_user: "1",
-    //token: "32fb7f591b9f3c7d745ddd51670f2d109b54662b704078c06e14335e241bcb70"
+    id_user: "1",
+    token: "32fb7f591b9f3c7d745ddd51670f2d109b54662b704078c06e14335e241bcb70"
   };
 
   $scope.registerUser = function() {
@@ -187,21 +188,7 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
       });
   }
   
-  $scope.loggedUserProfile = {
-			  nama_user: json[0].nama_user,
-              email_user: json[0].email_user,
-              password_user: json[0].password_user,
-              no_telp_user: json[0].no_telp_user,
-              nama_perusahaan_user: json[0].nama_perusahaan_user,
-              alamat_user: json[0].alamat_user,
-			  nama_cc_user: json[0].nama_cc_user,
-			  alamat_cc_user: json[0].alamat_cc_user,
-			  nomor_cc_user: json[0].nomor_cc_user,
-			  nomor_vcv_user: json[0].nomor_vcv_user,
-			  expire_month_user: json[0].expire_month_user,
-			  expire_year_user: json[0].expire_year_user
-		  }
-  
+    
   $scope.loginUser = function() {
     $http({
       method: 'POST',

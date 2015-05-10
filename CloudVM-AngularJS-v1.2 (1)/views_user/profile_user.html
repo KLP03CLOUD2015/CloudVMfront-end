@@ -1,7 +1,7 @@
 
 <!--============== Profile ==============-->
 
-<div class="container sign-in-up" id="contact" ng-controller="UserController">
+<div class="container sign-in-up" id="contact" ng-controller="UserController" ng-init="loadUserProfile()">
   <div class="row PageHead">
     <div class="col-md-12">
       <h1>Profile</h1>
@@ -30,7 +30,7 @@
               <div class="form-group form-group-lg">
                 <div class="right-inner-addon">
                   <i class="fa fa-building-o"></i>
-                  <input class="form-control" type="text" placeholder="Company Name" name="companyName" id="companyName" disabled>
+                  <input class="form-control" type="text" placeholder="Company Name" name="companyName" id="companyName" disabled ng-model="loggedUserProfile.nama_perusahaan_user" >
                 </div>
               </div>
               
@@ -38,7 +38,7 @@
               <div class="form-group form-group-lg">
                 <div class="right-inner-addon">
                   <i class="fa fa-road"></i>
-                  <input class="form-control" type="text" placeholder="Address" name="address" id="address" disabled>
+                  <input class="form-control" type="text" placeholder="Address" name="address" id="address" disabled ng-model="loggedUserProfile.alamat_user" >
                 </div>
               </div>
               
@@ -46,7 +46,7 @@
               <div class="form-group form-group-lg">
                 <div class="right-inner-addon">
                   <i class="fa fa-phone"></i>
-                  <input class="form-control" type="text" placeholder="Valid Phone Number" name="phoneNumber" id="phoneNumber" disabled>
+                  <input class="form-control" type="text" placeholder="Valid Phone Number" name="phoneNumber" id="phoneNumber" disabled ng-model="loggedUserProfile.no_telp_user">
                 </div>
               </div>
               
@@ -54,25 +54,10 @@
               <div class="form-group form-group-lg">
                 <div class="right-inner-addon">
                   <i class="fa fa-envelope"></i>
-                  <input class="form-control" type="text" placeholder="Valid Email" name="email" id="email" disabled>
+                  <input class="form-control" type="text" placeholder="Valid Email" name="email" id="email" disabled ng-model="loggedUserProfile.email_user">
                 </div>
               </div>
               
-              <label>Password:</label>
-              <div class="form-group form-group-lg">
-                <div class="right-inner-addon">
-                  <i class="fa fa-key"></i>
-                  <input class="form-control" type="password" placeholder="Password" name="password" id="password" disabled>
-                </div>
-              </div>
-              
-              <label>Confirm Password:</label>
-              <div class="form-group form-group-lg">
-                <div class="right-inner-addon">
-                  <i class="fa fa-key"></i>
-                  <input class="form-control" type="password" placeholder="Password" name="password" id="password" disabled>
-                </div>
-              </div>
     </div> <!-- div class with pads personal data -->
     </div> <!-- div row -->
     <div class="col-md-6">
@@ -87,7 +72,7 @@
         <div class="form-group form-group-lg">
           <div class="right-inner-addon">
             <i class="fa fa-user"></i>
-            <input class="form-control" type="text" placeholder="Name" name="ccName" id="ccName" disabled>
+            <input class="form-control" type="text" placeholder="Name" name="ccName" id="ccName" disabled ng-model="loggedUserProfile.nama_cc_user">
           </div>
         </div>
         
@@ -95,7 +80,7 @@
         <div class="form-group form-group-lg">
           <div class="right-inner-addon">
             <i class="fa fa-road"></i>
-            <input class="form-control" type="text" placeholder="Billing Address" name="ccAddress" id="ccAddress" disabled>
+            <input class="form-control" type="text" placeholder="Billing Address" name="ccAddress" id="ccAddress" disabled ng-model="loggedUserProfile.alamat_cc_user">
           </div>
         </div>
         
@@ -103,7 +88,7 @@
         <div class="form-group form-group-lg">
           <div class="right-inner-addon">
             <i class="fa fa-credit-card"></i>
-            <input class="form-control" type="text" placeholder="Credit Card Number" name="ccNumber" id="ccNumber" disabled>
+            <input class="form-control" type="text" placeholder="Credit Card Number" name="ccNumber" id="ccNumber" disabled ng-model="loggedUserProfile.nomor_cc_user">
           </div>
         </div>
         
@@ -111,14 +96,14 @@
         <div class="form-group form-group-lg">
           <div class="right-inner-addon">
             <i class="fa fa-user"></i>
-            <input class="form-control" type="text" placeholder="CVC" name="cvc" id="cvc" disabled>
+            <input class="form-control" type="text" placeholder="CVC" name="cvc" id="cvc" disabled ng-model="loggedUserProfile.nomor_vcv_user">
           </div>
         </div>
         <label>Expiration Month:</label>
         <div class="form-group form-group-lg">
           <div class="right-inner-addon">
             <i class="fa fa-calendar"></i>
-            <input class="form-control" type="text" placeholder="MM" name="ccMonth" id="ccMonth" disabled>
+            <input class="form-control" type="text" placeholder="MM" name="ccMonth" id="ccMonth" disabled ng-model="loggedUserProfile.expire_month_user">
           </div>
         </div>
         
@@ -126,7 +111,7 @@
         <div class="form-group form-group-lg">
           <div class="right-inner-addon">
             <i class="fa fa-calendar"></i>
-            <input class="form-control" type="text" placeholder="YYYY" name="ccYear" id="ccYear" disabled>
+            <input class="form-control" type="text" placeholder="YYYY" name="ccYear" id="ccYear" disabled ng-model="loggedUserProfile.expire_year_user">
           </div>
         </div>
       </div> <!-- div class with pads col payment -->

@@ -126,11 +126,13 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
   
   $scope.formData = {};
   $scope.user = {};
-  $scope.loggedUserProfile = {};
   $scope.loggedUser = {
-    id_user: "1",
-    token: "32fb7f591b9f3c7d745ddd51670f2d109b54662b704078c06e14335e241bcb70"
+    //id_user: "1",
+    //token: "32fb7f591b9f3c7d745ddd51670f2d109b54662b704078c06e14335e241bcb70"
   };
+
+  // DEKLRASI VARIABEL
+  $scope.loggedUserProfile = {};
 
   $scope.registerUser = function() {
     console.log("Yay");
@@ -159,36 +161,61 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
   }
 
   $scope.checkUser = function() {
-    console.log("mumumu");
-    $http({
-        method: 'POST',
-        url: 'http://localhost:8183/user/profile',
-        data: $.param($scope.loggedUser),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .success(function(data) {
-          $cookies.nama_user = data.json[0].nama_user;
-          console.log($cookies.nama_user);
-		  //console.log(data.json[0].email_user);
-		  $scope.loggedUserProfile = {
-			  nama_user: data.json[0].nama_user,
-              email_user: data.json[0].email_user,
-              password_user: data.json[0].password_user,
-              no_telp_user: data.json[0].no_telp_user,
-              nama_perusahaan_user: data.json[0].nama_perusahaan_user,
-              alamat_user: data.json[0].alamat_user,
-			  nama_cc_user: data.json[0].nama_cc_user,
-			  alamat_cc_user: data.json[0].alamat_cc_user,
-			  nomor_cc_user: data.json[0].nomor_cc_user,
-			  nomor_vcv_user: data.json[0].nomor_vcv_user,
-			  expire_month_user: data.json[0].expire_month_user,
-			  expire_year_user: data.json[0].expire_year_user
-		  }
-		  console.log($scope.loggedUserProfile);
-      });
+    //console.log("mumumu");
+    
   }
   
-    
+
+    $scope.loadUserProfile = function() {
+
+      // MAKE A DUMMY 
+      $scope.loggedUser = {
+        id_user: "1",
+		nama_user: "Budi",
+		nama_perusahaan_user: "budicorp",
+		alamat_user: "Keputih",
+		no_telp_user: "54674637",
+		email_user: "budi@budi.com",
+		password_user: "123424hdgfd",
+		nama_cc_user: "budi",
+		alamat_cc_user: "Keputih",
+		nomor_cc_user: "1234567",
+		nomor_vcv_user: "123",
+		expire_month_cc_user: 12,
+		expire_year_cc_user: 2015,
+        token: "32fb7f591b9f3c7d745ddd51670f2d109b54662b704078c06e14335e241bcb70"
+      };
+
+
+      $http({
+            method: 'POST',
+            url: 'http://localhost:8183/user/profile',
+            data: $.param($scope.loggedUser),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          })
+          .success(function(res) {
+              $cookies.nama_user = res.json[0].nama_user;
+              console.log($cookies.nama_user);
+
+              $scope.loggedUserProfile = {
+                nama_user: res.json[0].nama_user,
+                      email_user: res.json[0].email_user,
+                      no_telp_user: res.json[0].no_telp_user,
+                      nama_perusahaan_user: res.json[0].nama_perusahaan_user,
+                      alamat_user: res.json[0].alamat_user,
+                      nama_cc_user: res.json[0].nama_cc_user,
+                      alamat_cc_user: res.json[0].alamat_cc_user,
+                      nomor_cc_user: res.json[0].nomor_cc_user,
+                      nomor_vcv_user: res.json[0].nomor_vcv_user,
+                      expire_month_cc_user: res.json[0].expire_month_cc_user,
+                      expire_year_cc_user: res.json[0].expire_year_cc_user
+              }
+            
+            console.log($scope.loggedUserProfile);
+          });
+    }
+
+  
   $scope.loginUser = function() {
     $http({
       method: 'POST',
@@ -208,8 +235,33 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
           };
         
           $location.path('/profile');
-          $scope.checkUser();
-		  
+
+          $http({
+            method: 'POST',
+            url: 'http://localhost:8183/user/profile',
+            data: $.param($scope.loggedUser),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          })
+          .success(function(res) {
+              $cookies.nama_user = res.json[0].nama_user;
+              console.log($cookies.nama_user);
+
+              $scope.loggedUserProfile = {
+                nama_user: res.json[0].nama_user,
+                      email_user: res.json[0].email_user,
+                      no_telp_user: res.json[0].no_telp_user,
+                      nama_perusahaan_user: res.json[0].nama_perusahaan_user,
+                      alamat_user: res.json[0].alamat_user,
+                      nama_cc_user: res.json[0].nama_cc_user,
+                      alamat_cc_user: res.json[0].alamat_cc_user,
+                      nomor_cc_user: res.json[0].nomor_cc_user,
+                      nomor_vcv_user: res.json[0].nomor_vcv_user,
+                      expire_month_cc_user: res.json[0].expire_month_cc_user,
+                      expire_year_cc_user: res.json[0].expire_year_cc_user
+              }
+            
+            console.log($scope.loggedUserProfile);
+          });
     });
   }
 

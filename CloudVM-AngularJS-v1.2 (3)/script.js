@@ -127,6 +127,7 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
   $scope.formData = {};
   $scope.loggedUser = {};
   $scope.user = {};
+  $scope.pricings = {};
 
   $scope.registerUser = function() {
     //console.log("Yay");
@@ -193,6 +194,17 @@ myApp.controller("InstanceController", function($scope, $http, $location ,$cooki
             token: "3dcf5f13536b1d2e2f9a15f53713c41c5a446fa2fb9c7bbc51a8f776bc56956d"
   };
   
+  $scope.InstanceDataEdit ={
+			id_user: "2",
+			nama_instance: "ins2",
+			id_plan: "3",
+			token: "3dcf5f13536b1d2e2f9a15f53713c41c5a446fa2fb9c7bbc51a8f776bc56956d",
+			deleted: "0"
+			status_pembayaran: "0"
+	//		nama_instance_baru:
+			uuid_vm: "64hb63h"
+  };
+  
   $scope.oses = [
 		{'os': 'ubuntu', 'description': 'Ubuntu'},
         {'os': 'debian', 'description': 'Debian'},
@@ -206,6 +218,9 @@ myApp.controller("InstanceController", function($scope, $http, $location ,$cooki
         {'id_plan': '4', 'description': 'Small-2'},
         {'id_plan': '5', 'description': 'Large-2'}
   ]; 
+
+  $scope.listPlan = {};
+  $scope.planski = [{}];
   
   $scope.createInstance = function() {
     $http({
@@ -215,18 +230,56 @@ myApp.controller("InstanceController", function($scope, $http, $location ,$cooki
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {
-          console.log("harusnya jalan coy");
+          console.log("im here");
 		 $location.path('/instance')
       });
   }
 
+   $scope.editInstance = function() {
+    $http({
+        method: 'POST',
+        url: 'http://localhost:8183/instance/edit',
+        data: $.param($scope.instanceDataEdit),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+      .success(function(data) {
+          console.log("or there");
+		 $location.path('/instance')
+      });
+  }
+  
   $scope.getInstanceList = function() {
     $http({
         method: 'GET',
         url: 'http://localhost:8183/instance/list',
       })
       .success(function(result) {
-          console.log(result);
+        console.log($scope.pricings);
+
+          //console.log(result);
+      });
+  }
+
+
+  $scope.loadAndCreateInstance = function() {
+    $http({
+        method: 'GET',
+        url: 'http://localhost:8183/plan/price_list',
+      })
+      .success(function(data) {
+          //console.log( data[0].length ); 
+          //console.log(data);
+          //console.log(data[0].length);
+          for(i=0; i<data[0].length; i++) {
+            $scope.planski.push({
+              id_plan: data[0][i].id_plan,
+              nama_plan: data[0][i].nama_plan
+            });
+          };
+
+          $scope.listPlan = $scope.planski[2];
+
+          //console.log($scope.listPlan);
       });
   }
 /*

@@ -1,7 +1,7 @@
 
 <!--============== Create Instance ==============-->
 
-<div class="container sign-in-up" id="contact" ng-controller="InstanceController as IC" ng-init="IC.getInstanceList()">
+<div class="container sign-in-up" id="contact" ng-controller="InstanceController as IC" ng-init="IC.loadAndCreateInstance()">
   <div class="row PageHead">
     <div class="col-md-12">
       <h1>Create Instance</h1>
@@ -15,7 +15,7 @@
 
         <label>Choose Your Plan:</label>
         <div class="form-group form-group-lg"> 
-          <select ng-init="getInstanceList()" class="form-control" id="plan" name="plan" ng-model="instanceData.id_plan" ng-options="b.id_plan as b.description for b in plans">
+          <select class="form-control" id="plan" name="plan" ng-model="listPlan" ng-options="plan.id_plan for plan in planski">
           </select>
         </div>
 
@@ -40,6 +40,18 @@
             <button class="btn btn-primary" type="button">Generate</button>
           </span>
         </div>
+
+        <div class="col-md-12">
+        <HR>
+        <div class="form-group">
+          <p>
+            <button ng-click="loadAndCreateInstance()" id="tryInstance" class="btn btn-success btn-lg center-block" type="submit">Try Me</button>
+          </p>
+          <span class="loading"></span> 
+        </div>
+        </form>
+      </div>
+    
 
         <HR>
         <br/>  

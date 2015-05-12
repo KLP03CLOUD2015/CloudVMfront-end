@@ -44,3 +44,8 @@ CloudVM-v1.0
 6-5-2015 **(CloudVM-AngularJS-v1.2)**
 - Pembagian tugas: http://bit.ly/front-cloudvm
 - *Deadline: Sabtu, 9 Mei 2015*
+
+12-5-2015 **(CloudVM-FrontEnd-v2.0)**
+- Semua page sudah digabung
+- Instance Management masih ada masalah & dalam tahap pengembangan ekspres
+- Session masih belom 

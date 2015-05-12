@@ -1,6 +1,6 @@
 <!--============== Manage Instance ==============-->
 
-<div class="container sign-in-up" id="contact" ng-controller="InstanceController" ng-init="loadInstance()">
+<div class="container sign-in-up" id="contact" ng-controller="UserController" ng-init="loadInstance()">
   <div class="row PageHead">
     <div class="col-md-12">
       <h1>Manage Your Instance</h1>
@@ -15,20 +15,47 @@
         <tr>
           <th>Name</th>
           <th>ID</th>
-          <th>Type</th>
           <th>State</th>
           <th>IP</th>
-          <th>Selection</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="instance in instances">
           <td>{{instance.nama_instance}}</td>
           <td>{{instance.uuid_vm}}</td>
-          <td>{{instance.tipe_instance}}</td>
           <td>Running</td>
           <td>139.195.112.212</td>
-          <td><input type="checkbox"/></td>
+          <td>
+            <div class="input-group">
+              <button ng-click="startInstance()" id="startInstanceBtn" class="btn btn-primary" type="submit">Start</button>
+            </div>
+          </td>
+          <td>
+            <div class="input-group">
+              <button ng-click="stopInstance()" id="stopInstanceBtn" class="btn btn-primary" type="submit">Stop</button>
+            </div>
+          </td>
+          <td>
+            <div class="input-group">
+              <button ng-click="restartInstance()" id="restartInstanceBtn" class="btn btn-primary" type="submit">Restart</button>
+            </div>
+          </td>
+          <td>
+
+            <div class="btn-group" role="group">
+              <button class="btn btn-default dropdown-toggle" type="button" id="tryMenu" data-toggle="dropdown">
+              Action<span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="tryStart()" type="submit">Start</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Stop</a></li>
+              </ul>
+            </div>
+
+          </td>
         </tr>
       </tbody>
     </table>
@@ -53,6 +80,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Stop</a></li>
       </ul>
     </div>
+
     <button class="btn btn-primary"> Add <span class="fa fa-plus" aria-hidden="true"></span></button>
     <button class="btn btn-primary"> Edit <span class="fa fa-plus" aria-hidden="true"></span></button>
   </div>

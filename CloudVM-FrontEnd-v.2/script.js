@@ -274,6 +274,10 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
 
   $scope.dummyPlan = {};
 
+  $scope.tryStart = function() {
+    console.log("hey");
+  }
+
   $scope.checkPlanPrice = function() {
     //console.log("oh hey");
      $http({
@@ -307,10 +311,6 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
       });
   }
 
-  $scope.loadInstance = function() {
-    console.log($scope.plans);
-  }
-
    $scope.createInstance = function() {
     $http({
         method: 'POST',
@@ -335,7 +335,7 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
     $http({
         method: 'POST',
         url: 'http://localhost:8183/user/instances',
-        data: $.param($scope.loggedUser),
+        data: $.param($scope.dummyUser),
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {

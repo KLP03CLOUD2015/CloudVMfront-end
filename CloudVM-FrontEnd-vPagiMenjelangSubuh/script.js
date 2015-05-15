@@ -156,11 +156,16 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
 
   $scope.loadUserProfile = function() {
       
-      $scope.loggedUser = {
+/*      $scope.loggedUser = {
         id_user: "9",
         token: "32fb7f591b9f3c7d745ddd51670f2d109b54662b704078c06e14335e241bcb70"
       };
+*/
 
+      $scope.loggedUser = { 
+            id_user: $cookies.id_user,
+            token: $cookies.token
+      };
       console.log("1");
 
       $http({
@@ -170,8 +175,9 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies) 
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
           })
           .success(function(res) {
-              // $cookies.nama_user = res.json[0].nama_user;
-              // console.log($cookies.nama_user);
+               $cookies.nama_user = res.json[0].nama_user;
+              console.log($cookies.nama_user);
+              console.log($cookies.id_user)
               console.log("2");
               $scope.loggedUserProfile = {
                 nama_user: res.json[0].nama_user,

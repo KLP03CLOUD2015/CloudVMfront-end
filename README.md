@@ -49,3 +49,6 @@ CloudVM-v1.0
 - Semua page sudah digabung
 - Instance Management masih ada masalah & dalam tahap pengembangan ekspres
 - Session masih belom 
+
+15-5-2015 
+- Untuk testing keperluan dokumentasi pakai CloudVM-Backend-v.3.2 untuk Backend dan CloudVM-FrontEnd-v.3 untuk Frontend. 

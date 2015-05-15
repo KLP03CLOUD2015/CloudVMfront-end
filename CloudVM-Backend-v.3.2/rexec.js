@@ -25,6 +25,7 @@ module.exports.createInstance = function(os,nama_instance,callback)
 
 module.exports.getInstanceUUID = function(nama_instance,callback)
 {
+
     cmds=['xe vm-list name-label="'+nama_instance+'" --minimal'];
     rexec(cfg.hosts, cmds, cfg.ssh_options, function(err){
         if (err) {
@@ -42,10 +43,10 @@ module.exports.scaleInstance = function(cpu,memori,storage,uuid,nama_instance,ca
     cmds=[
             'xe vm-param-set VCPUs-max='+cpu+' uuid='+uuid,
             'xe vm-param-set VCPUs-at-startup='+cpu+' uuid='+uuid,
-            'xe vm-param-set memory-static-min=0 uuid='+uuid,
-            'xe vm-param-set memory-dynamic-min=1GiB uuid='+uuid,
             'xe vm-param-set memory-static-max='+memori+'GiB uuid='+uuid,
             'xe vm-param-set memory-dynamic-max='+memori+'GiB uuid='+uuid,
+            'xe vm-param-set memory-static-min=256 uuid='+uuid,
+            'xe vm-param-set memory-dynamic-min=1GiB uuid='+uuid,
             'resize_vm_disk '+nama_instance+' '+storage
         ];
         rexec(cfg.hosts, cmds, cfg.ssh_options, function(err){
@@ -61,6 +62,7 @@ module.exports.scaleInstance = function(cpu,memori,storage,uuid,nama_instance,ca
 
 module.exports.getInstanceIP = function(uuid,callback)
 {
+    cfg.ssh_options.stdout = fs.createWriteStream('./out.txt');
     cmds=[
             'xe vm-param-get uuid='+uuid+' param-name=networks'
         ];
@@ -71,8 +73,11 @@ module.exports.getInstanceIP = function(uuid,callback)
         } else {
             var ipstring = fs.readFileSync('out.txt','utf8');
             var ip = ipstring.split(";");
+            console.log(ip)
             var ip2 = ip[0].split(":");
+            console.log(ip2)
             var tmp = ip2[1];
+            console.log(tmp);
             var ip_hasil = tmp.trim();
             console.log(ip_hasil);
             var ip_split = ip_hasil.split('.');

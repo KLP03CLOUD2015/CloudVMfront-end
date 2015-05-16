@@ -1,0 +1,69 @@
+<!--============== Manage Instance ==============-->
+
+<div class="container sign-in-up" id="contact" ng-controller="UserController" ng-init="loadInstance()">
+  <div class="row PageHead">
+    <div class="col-md-12">
+      <h1>Manage Your Instance</h1>
+      <br/>
+    </div>
+  </div>
+  <HR>
+  <div class="row">  
+
+    <table class="table table-striped table-condensed">
+      <thead>
+        <tr class="text-center">
+          <th>Name</th>
+          <th>ID</th>
+          <th>State</th>
+          <th>Action</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="instance in instances" ng-hide="checkState(instance.deleted)">
+          <td>{{instance.nama_instance}}</td>
+          <td>{{instance.uuid_vm}}</td>
+          <td>
+            <div class="input-group">
+            <div class="alert alert-block alert-danger center-block" ng-hide="checkState(instance.started)" class="hideByDefault">Stopped...
+            </div>
+            <div class="alert alert-block alert-success" ng-show="checkState(instance.started)" class="hideByDefault">Running...
+            </div>
+          </div>
+          </td>
+          <td>
+            <div class="btn-group" role="group">
+              <button class="btn btn-default dropdown-toggle" type="button" id="tryMenu" data-toggle="dropdown">
+              Action<span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="startInstance(instance.uuid_vm)" type="submit">Start</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="stopInstance(instance.uuid_vm)" type="submit">Stop</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="restartInstance(instance.uuid_vm)" type="submit">Restart</a></li>
+              </ul>
+            </div>
+          </td>
+          <td>
+            <button ng-click="getInfo(instance.uuid_vm,instance.nama_instance)" id="getInfoBtn" class="btn btn-primary" type="submit">Details</button>
+          </td>
+          <td>
+            <button ng-click="editInstance(instance.uuid_vm)" id="editInstanceBtn" class="btn btn-primary" type="submit">Edit Instance</button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <br/>
+    <HR>
+
+     <div class="form-group form-group-lg">
+      <div class="alert alert-block alert-warning" ng-show="selectInstance.isSelected" class="hideByDefault">
+          <h4>SSH for {{selectInstance.nama_instance}} : </h4>
+          {{selectInstance.ssh}}
+      </div>
+    </div>
+
+  </div>
+</div>

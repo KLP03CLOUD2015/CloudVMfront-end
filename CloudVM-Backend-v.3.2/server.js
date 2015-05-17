@@ -619,7 +619,7 @@ instance_create.post(function(req, res, next) {
 							     function(arg2,callback)
 							     {
                                         console.log("arg2:" + arg2);
-							     	 	var sql = 'INSERT INTO INSTANCES  (id_user,nama_instance,uuid_vm,id_plan,status_pembayaran,deleted,tanggal,started) values("' + id_user + '","' + nama_instance + '","' + arg2+ '",' + id_plan + ',1,0,NOW(),0)';
+							     	 	var sql = 'INSERT INTO INSTANCES  (id_user,nama_instance,uuid_vm,id_plan,status_pembayaran,deleted,tanggal,started) values("' + id_user + '","' + nama_instance + '","' + arg2.trim()+ '",' + id_plan + ',1,0,NOW(),0)';
 			                            connection.query(sql, function(err, rows, fields) {
 			                                if (err) {
 			                                    console.error(err);
@@ -758,7 +758,28 @@ instance_edit.post(function(req, res, next) {
 		                                    connection.release();
 		                                });
 		                                	callback(null);
-		                            }
+		                            },
+                                    function(callback)
+                                    {
+                                        cmds=[
+                                            'xe vm-param-set name-label="'+req.body.nama_instance_baru+'" uuid=\`xe vm-list name-label="'+req.body.nama_instance+'" --minimal\`'
+
+                                        ];
+                                        rexec(cfg.hosts, cmds, cfg.ssh_options, function(err){
+                                            if (err) {
+                                                console.log(err);
+                                                /*res.send({
+                                                            result: 'error',
+                                                            err: err.code
+                                                        });*/
+                                            } else {
+                                                console.log('vm '+ req.body.uuid_vm + ' name updated');
+                                                /*res.send({
+                                                    result: 'vm_start_succeed'
+                                                });*/
+                                            }
+                                    });
+                                    }
                         		]);
 
                             }

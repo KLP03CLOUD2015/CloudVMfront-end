@@ -179,6 +179,26 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
       } else {
         console.log("There are no cookies for uuid_vm stored yet.");
       }
+      if( $cookies.nama_instance !== null || $cookies.nama_instance !== undefined || $cookies.nama_instance != "" ) {
+        $cookies.nama_instance = undefined;
+      } else {
+        console.log("There are no cookies for nama_instance stored yet.");
+      }
+      if( $cookies.tanggal !== null || $cookies.tanggal !== undefined || $cookies.tanggal != "" ) {
+        $cookies.tanggal = undefined;
+      } else {
+        console.log("There are no cookies for tanggal stored yet.");
+      }
+      if( $cookies.status_pembayaran !== null || $cookies.status_pembayaran !== undefined || $cookies.status_pembayaran != "" ) {
+        $cookies.status_pembayaran = undefined;
+      } else {
+        console.log("There are no cookies for status_pembayaran stored yet.");
+      }
+      if( $cookies.deleted !== null || $cookies.deleted !== undefined || $cookies.deleted != "" ) {
+        $cookies.deleted = undefined;
+      } else {
+        console.log("There are no cookies for deleted stored yet.");
+      }
     }
     else if ( x =="AllCookies" ) {
       console.log("Reseting all cookies");
@@ -196,6 +216,26 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
           $cookies.uuid_vm = undefined;
         } else {
           console.log("There are no cookies for uuid_vm stored yet.");
+        }
+        if( $cookies.nama_instance !== null || $cookies.nama_instance !== undefined || $cookies.nama_instance != "" ) {
+          $cookies.nama_instance = undefined;
+        } else {
+          console.log("There are no cookies for nama_instance stored yet.");
+        }
+        if( $cookies.tanggal !== null || $cookies.tanggal !== undefined || $cookies.tanggal != "" ) {
+          $cookies.tanggal = undefined;
+        } else {
+          console.log("There are no cookies for tanggal stored yet.");
+        }
+        if( $cookies.status_pembayaran !== null || $cookies.status_pembayaran !== undefined || $cookies.status_pembayaran != "" ) {
+          $cookies.status_pembayaran = undefined;
+        } else {
+          console.log("There are no cookies for status_pembayaran stored yet.");
+        }
+        if( $cookies.deleted !== null || $cookies.deleted !== undefined || $cookies.deleted != "" ) {
+          $cookies.deleted = undefined;
+        } else {
+          console.log("There are no cookies for deleted stored yet.");
         }
     }
     
@@ -250,12 +290,33 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     }
   }
 
-  $scope.createVMCookies = function(x) {
+  $scope.createVMCookies = function(a,b,c,d,e) {
     if ( $cookies.uuid_vm === undefined || $cookies.uuid_vm === null || $cookies.uuid_vm == "" ) {
-       $cookies.uuid_vm = x;
+       $cookies.uuid_vm = a;
     } else {
-     console.log("Error creating cookies for token, possible value is existed :" + $cookies.token);
+     console.log("Error creating cookies for uuid_vm, possible value is existed :" + $cookies.token);
     }
+    if ( $cookies.nama_instance === undefined || $cookies.nama_instance === null || $cookies.nama_instance == "" ) {
+       $cookies.nama_instance = b;
+    } else {
+     console.log("Error creating cookies for nama_instance, possible value is existed :" + $cookies.token);
+    }
+    if(  $cookies.tanggal === undefined || $cookies.tanggal === null || $cookies.tanggal == "" ) {
+      $cookies.tanggal = c;
+    } else {
+      console.log("There are no cookies for tanggal stored yet.");
+    }
+    if( $cookies.status_pembayaran === undefined || $cookies.status_pembayaran === null ||  $cookies.status_pembayaran !== "" ) {
+      $cookies.status_pembayaran = d;
+    } else {
+      console.log("There are no cookies for status_pembayaran stored yet.");
+    }
+    if( $cookies.deleted === undefined || $cookies.deleted === null || $cookies.deleted == "" ) {
+      $cookies.deleted = e;
+    } else {
+      console.log("There are no cookies for deleted stored yet.");
+    }
+
   }
 
   $scope.checkAccess = function() {
@@ -460,7 +521,7 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
   }
 
   /* b. Load  specific instance info */
-  $scope.getInfo = function(x,y)
+  $scope.getInfo = function(x,y,z)
   {
     $scope.dummyInstance = { 
         id_user: $cookies.id_user,
@@ -477,9 +538,19 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {
-          $scope.selectInstance.nama_instance = y;
-          $scope.selectInstance.ssh = data.ip;
-          $scope.selectInstance.isSelected = true;
+          if(z == "ssh") {
+            $scope.selectInstance.nama_instance = y;
+            $scope.selectInstance.ssh = data.ip;
+            $scope.selectInstance.isSelected = true;
+          } else if( z == "all") {
+            $scope.resetCookies("VMCookies");
+            $scope.createVMCookies(x,y,data.json[0].tanggal,data.json[0].status_pembayaran,data.json[0].deleted);
+            console.log($cookies.uuid_vm);
+            console.log($cookies.nama_instance);
+            console.log($cookies.tanggal);
+            console.log($cookies.status_pembayaran);
+            console.log($cookies.deleted);
+          }
       });
   }
 
@@ -637,17 +708,18 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
 
   /* b. Edit Instance */
 
-  $scope.editInstance = function(x) {
-    
-    $scope.resetCookies("VMCookies");
-    $scope.createVMCookies(x);
+  $scope.editInstance = function(x,y) {
+    $scope.getInfo(x, y, "all");
     $location.path('/instance/edit');
-
   }
 
   $scope.callingEditInstanceAPI = function() {
     
     $scope.dummyUser.uuid_vm = $cookies.uuid_vm;
+    $scope.dummyUser.nama_instance = $cookies.nama_instance;
+    $scope.dummyUser.tanggal = $cookies.tanggal;
+    $scope.dummyUser.status_pembayaran = $cookies.status_pembayaran;
+    $scope.dummyUser.deleted = $cookies.deleted;
 
     console.log("Here are the credentials before POST Edit Instances.")
     console.log($scope.dummyUser);

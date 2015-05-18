@@ -45,10 +45,14 @@
             </div>
           </td>
           <td>
-            <button ng-click="getInfo(instance.uuid_vm,instance.nama_instance,'ssh')" id="getInfoBtn" class="btn btn-primary" type="submit">Details</button>
+            <!-- If the instance is not running (0) yet then show this disabled button -->  
+           <!--  <button ng-hide="checkState(instance.started)" id="getInfoBtn" class="btn btn-primary btn-danger" type="submit" class="hideByDefault" ng-disabled="true">Details</button> -->
+            <!-- If the instance is running then show this button -->
+            <button ng-show="checkState(instance.started)" ng-click="getInfo(instance.uuid_vm,instance.nama_instance,'ssh')" id="getInfoBtn" class="btn btn-primary" type="submit" class="hideByDefault">Details</button>
+          
           </td>
           <td>
-            <button ng-click="editInstance(instance.uuid_vm,instance.nama_instance)" id="editInstanceBtn" class="btn btn-primary" type="submit">Edit Instance</button>
+            <button ng-hide="checkState(instance.started)" ng-click="editInstance(instance.uuid_vm,instance.nama_instance)" id="editInstanceBtn" class="btn btn-primary" type="submit" class="hideByDefault">Edit Instance</button>
           </td>
 
         </tr>
@@ -60,8 +64,17 @@
 
      <div class="form-group form-group-lg">
       <div class="alert alert-block alert-warning" ng-show="selectInstance.isSelected" class="hideByDefault">
-          <h4>SSH for {{selectInstance.nama_instance}} : </h4>
+          <h4>SSH for {{selectInstance.nama_instance}}: </h4>
           {{selectInstance.ssh}}
+          <br/>
+          <h5>Default User and Password:</h5>
+          <ul>
+            <li><b>Ubuntu</b> (user: <i>user</i>, password: <i>user</i>)</li> 
+            <li><b>Debian</b> (user: <i>root</i>, password: <i>root</i>)</li>
+            <li><b>Centos</b> (user: <i>root</i>, password: <i>centos</i>)</li>
+          </ul>
+          <br/>
+          Please change your user and password later in your VM.
       </div>
     </div>
 

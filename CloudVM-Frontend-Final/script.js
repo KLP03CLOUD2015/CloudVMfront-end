@@ -1,5 +1,5 @@
 //create a module myApp
-var myApp = angular.module('myApp', ['ngRoute','ngCookies']);
+var myApp = angular.module('myApp', ['ngRoute','ngCookies','ng']);
  
 //Now Configure  our  routing
 myApp.config(function($routeProvider, $locationProvider,$httpProvider) {
@@ -162,12 +162,14 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     if ( x == "UserCookies" || x === "UserCookies" ) {
         console.log("Reseting user cookies");
         if( $cookies.id_user !== null || $cookies.id_user !== undefined || $cookies.id_user != "" ) {
-          $cookies.id_user = undefined;
+          //$cookies.id_user = undefined;
+          $cookieStore.remove('id_user');
         } else {
           console.log("There are no cookies for id_user stored yet.");
         }
         if( $cookies.token !== null || $cookies.token !== undefined || $cookies.token != "" ) {
-          $cookies.token = undefined;
+          //$cookies.token = undefined;
+          $cookieStore.remove('token');
         } else {
           console.log("There are no cookies for token stored yet.");
         }
@@ -175,80 +177,97 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     else if ( x == "VMCookies" || x === "VMCookies" ) {
       console.log("Reseting VM cookies");
       if( $cookies.uuid_vm !== null || $cookies.uuid_vm !== undefined || $cookies.uuid_vm != "" ) {
-        $cookies.uuid_vm = undefined;
-      } else {
-        console.log("There are no cookies for uuid_vm stored yet.");
-      }
-      if( $cookies.nama_instance !== null || $cookies.nama_instance !== undefined || $cookies.nama_instance != "" ) {
-        $cookies.nama_instance = undefined;
-      } else {
-        console.log("There are no cookies for nama_instance stored yet.");
-      }
-      if( $cookies.tanggal !== null || $cookies.tanggal !== undefined || $cookies.tanggal != "" ) {
-        $cookies.tanggal = undefined;
-      } else {
-        console.log("There are no cookies for tanggal stored yet.");
-      }
-      if( $cookies.status_pembayaran !== null || $cookies.status_pembayaran !== undefined || $cookies.status_pembayaran != "" ) {
-        $cookies.status_pembayaran = undefined;
-      } else {
-        console.log("There are no cookies for status_pembayaran stored yet.");
-      }
-      if( $cookies.deleted !== null || $cookies.deleted !== undefined || $cookies.deleted != "" ) {
-        $cookies.deleted = undefined;
-      } else {
-        console.log("There are no cookies for deleted stored yet.");
-      }
-    }
-    else if ( x =="AllCookies" ) {
-      console.log("Reseting all cookies");
-      if( $cookies.id_user !== null || $cookies.id_user !== undefined || $cookies.id_user != "" ) {
-          $cookies.id_user = undefined;
-        } else {
-          console.log("There are no cookies for id_user stored yet.");
-        }
-        if( $cookies.token !== null || $cookies.token !== undefined || $cookies.token != "" ) {
-          $cookies.token = undefined;
-        } else {
-          console.log("There are no cookies for token stored yet.");
-        }
-        if( $cookies.uuid_vm !== null || $cookies.uuid_vm !== undefined || $cookies.uuid_vm != "" ) {
-          $cookies.uuid_vm = undefined;
+          //$cookies.uuid_vm = undefined;
+          $cookieStore.remove('uuid_vm');
         } else {
           console.log("There are no cookies for uuid_vm stored yet.");
         }
         if( $cookies.nama_instance !== null || $cookies.nama_instance !== undefined || $cookies.nama_instance != "" ) {
-          $cookies.nama_instance = undefined;
+         // $cookies.nama_instance = undefined;
+         $cookieStore.remove('nama_instance');
         } else {
           console.log("There are no cookies for nama_instance stored yet.");
         }
         if( $cookies.tanggal !== null || $cookies.tanggal !== undefined || $cookies.tanggal != "" ) {
-          $cookies.tanggal = undefined;
+          //$cookies.tanggal = undefined;
+          $cookieStore.remove('tanggal');
         } else {
           console.log("There are no cookies for tanggal stored yet.");
         }
         if( $cookies.status_pembayaran !== null || $cookies.status_pembayaran !== undefined || $cookies.status_pembayaran != "" ) {
-          $cookies.status_pembayaran = undefined;
+          //$cookies.status_pembayaran = undefined;
+          $cookieStore.remove('status_pembayaran');
         } else {
           console.log("There are no cookies for status_pembayaran stored yet.");
         }
         if( $cookies.deleted !== null || $cookies.deleted !== undefined || $cookies.deleted != "" ) {
-          $cookies.deleted = undefined;
+          //$cookies.deleted = undefined;
+          $cookieStore.remove('deleted');
         } else {
           console.log("There are no cookies for deleted stored yet.");
         }
+        if( $cookies.id_plan !== null || $cookies.id_plan !== undefined || $cookies.id_plan != "" ) {
+        //$cookies.id_plan = undefined;
+          $cookieStore.remove('id_plan');
+        } else {
+          console.log("There are no cookies for id_plan stored yet.");
+        }
+
+    }
+    else if ( x =="AllCookies" ) {
+        console.log("Reseting all cookies");
+        if( $cookies.id_user !== null || $cookies.id_user !== undefined || $cookies.id_user != "" ) {
+          //$cookies.id_user = undefined;
+          $cookieStore.remove('id_user');
+          //console.log("id_user resetted, it became: " + $cookies.id_user);
+        } else {
+          console.log("There are no cookies for id_user stored yet.");
+        }
+        if( $cookies.token !== null || $cookies.token !== undefined || $cookies.token != "" ) {
+          //$cookies.token = undefined;
+          $cookieStore.remove('token');
+        } else {
+          console.log("There are no cookies for token stored yet.");
+        }
+        if( $cookies.uuid_vm !== null || $cookies.uuid_vm !== undefined || $cookies.uuid_vm != "" ) {
+          //$cookies.uuid_vm = undefined;
+          $cookieStore.remove('uuid_vm');
+        } else {
+          console.log("There are no cookies for uuid_vm stored yet.");
+        }
+        if( $cookies.nama_instance !== null || $cookies.nama_instance !== undefined || $cookies.nama_instance != "" ) {
+         // $cookies.nama_instance = undefined;
+         $cookieStore.remove('nama_instance');
+        } else {
+          console.log("There are no cookies for nama_instance stored yet.");
+        }
+        if( $cookies.tanggal !== null || $cookies.tanggal !== undefined || $cookies.tanggal != "" ) {
+          //$cookies.tanggal = undefined;
+          $cookieStore.remove('tanggal');
+        } else {
+          console.log("There are no cookies for tanggal stored yet.");
+        }
+        if( $cookies.status_pembayaran !== null || $cookies.status_pembayaran !== undefined || $cookies.status_pembayaran != "" ) {
+          //$cookies.status_pembayaran = undefined;
+          $cookieStore.remove('status_pembayaran');
+        } else {
+          console.log("There are no cookies for status_pembayaran stored yet.");
+        }
+        if( $cookies.deleted !== null || $cookies.deleted !== undefined || $cookies.deleted != "" ) {
+          //$cookies.deleted = undefined;
+          $cookieStore.remove('deleted');
+        } else {
+          console.log("There are no cookies for deleted stored yet.");
+        }
+        if( $cookies.id_plan !== null || $cookies.id_plan !== undefined || $cookies.id_plan != "" ) {
+        //$cookies.id_plan = undefined;
+          $cookieStore.remove('id_plan');
+        } else {
+          console.log("There are no cookies for id_plan stored yet.");
+        }
+        console.log("All cookies are resetted.");
     }
     
-  }
-
-  $scope.hasAccess = function(x) {
-    if ( x === true || x == true ) {
-      console.log("User has access.")
-      return true;
-    } else if ( x === false || x == false ) {
-      console.log("User has no access. Should be redirected elsewhere.")
-      $location.path('/restricted');
-    }
   }
 
   $scope.checkExistingCookies = function(x) {
@@ -256,11 +275,12 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     /* If there are no cookies */
     if ( x == "UserCookies" || x === "UserCookies" ) {
         console.log("Checking if there are user cookies.");
-        if(  ($cookies.id_user === null || $cookies.id_user === undefined || $cookies.id_user == "") && ($cookies.token === null || $cookies.token === undefined || $cookies.token == "") ) {
+        if(  ($cookies.id_user === undefined || $cookies.id_user === null || $cookies.id_user === "") && ($cookies.token === undefined || $cookies.token === null || $cookies.token == "") ) {
           /* Then the page is restriced, redirect to error page */
             console.log("There are no user cookies stored yet.");
             return false;
-        } else {
+        } 
+        else {
           console.log("There are cookies for id_user: " + $cookies.id_user + " and token: " + $cookies.token);
           return true;
         }
@@ -290,7 +310,7 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     }
   }
 
-  $scope.createVMCookies = function(a,b,c,d,e) {
+  $scope.createVMCookies = function(a,b,c,d,e,f) {
     if ( $cookies.uuid_vm === undefined || $cookies.uuid_vm === null || $cookies.uuid_vm == "" ) {
        $cookies.uuid_vm = a;
     } else {
@@ -316,11 +336,55 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     } else {
       console.log("There are no cookies for deleted stored yet.");
     }
-
+    if( $cookies.id_plan === undefined || $cookies.id_plan === null || $cookies.id_plan == "" ) {
+      $cookies.id_plan = f;
+    } else {
+      console.log("There are no cookies for id_plan stored yet.");
+    }
   }
 
   $scope.checkAccess = function() {
-    $scope.hasAccess($scope.checkExistingCookies("UserCookies"));
+    console.log("Starting checkAccess...");
+    if ( $scope.checkExistingCookies("UserCookies") == true ) {
+      console.log("User has access.");
+      return true;
+    } 
+    else if ( $scope.checkExistingCookies("UserCookies") == false ) {
+      console.log("User has no access. Should be redirected elsewhere.");
+      $location.path('/restricted');
+      return false;
+    }
+    else {
+      console.log("None of the above.")
+      return false;
+    }    
+  }
+
+  $scope.isGlobal = function() {
+    console.log("Checking for global...");
+    //console.log($location.$$path);
+    if ( $scope.checkExistingCookies("UserCookies") == true ) {
+      console.log("User has active session.");
+      $location.path('/expire');
+    } 
+    else if ( $scope.checkExistingCookies("UserCookies") == false ) {
+      console.log("User has no active session, can ontinue.");
+    }
+  }
+
+  $scope.sessionExpiring = function() {
+    if ( $scope.checkExistingCookies("UserCookies") == true ) {
+      console.log("User has active session.");
+      console.log("id_user: " + $cookies.id_user + " and token: " + $cookies.token);
+    } 
+    else if ( $scope.checkExistingCookies("UserCookies") == false ) {
+      console.log("User has no access. Should be redirected elsewhere.");
+      $location.path('/restricted');
+    }
+  }
+
+  $scope.redirectTo = function(x) {
+    $location.path(x);
   }
 
 
@@ -336,9 +400,15 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {
-        $.each(data, function(index) {
-          alert(JSON.stringify(data[index].msg));
-        })
+          $.each(data, function(index) {
+            if(data[index].msg == "registrasi berhasil") {
+              alert("Account is successfully registered.");
+              $location.path('/login');
+            }
+            else {
+              alert(JSON.stringify(data[index].msg));
+            }
+          })
       });
       $scope.formData = {};
   }
@@ -357,13 +427,36 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .success(function(data) {
-
-          $scope.resetCookies("AllCookies");
+      if(data.result == "success") {
+          $scope.resetCookies("UserCookies");
           $scope.createUserCookies(data.id_user, ((JSON.stringify(data.token)).substring(1,65)) );
-
           $location.path('/dashboard');
+      } 
+      else if (data.result == "failed") {
+        alert("Incorrect email or password. Please retry");
+        $window.location.reload();
+      }
+
     });
   }
+
+
+  /* * * * * * *  * * * * * * * * * * * * * * * *
+    *         Functions used in Logout          * 
+    * * * * * * * * * * * * * * * * * * * * * * */
+
+  $scope.logoutUser = function() {
+    console.log("Ready to be logged out.");
+    if ( ($scope.checkExistingCookies("UserCookies")) == true )
+    {
+      $scope.resetCookies("AllCookies");
+      $location.path("/logout");
+    }
+    else {
+      $location.path("/restricted");
+    }
+  }
+
 
   /* * * * * * *  * * * * * * * * * * * * * * * *
     *   Functions used in Load User Profile     * 
@@ -371,40 +464,42 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
 
   $scope.loadUserProfile = function() {
    
-      $scope.checkAccess();
-      
-      $scope.loggedUser = { 
-            id_user: $cookies.id_user,
-            token: $cookies.token
-      };
+      console.log($scope.checkAccess());
+      if ( $scope.checkAccess() == true ) {    
+        $scope.loggedUser = { 
+              id_user: $cookies.id_user,
+              token: $cookies.token
+        };
 
-      $http({
-            method: 'POST',
-            url: 'http://localhost:8183/user/profile',
-            data: $.param($scope.loggedUser),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-          })
-          .success(function(res) {
+        $http({
+              method: 'POST',
+              url: 'http://localhost:8183/user/profile',
+              data: $.param($scope.loggedUser),
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+            .success(function(res) {
 
-               $cookies.nama_user = res.json[0].nama_user;
-                console.log($cookies.nama_user);
-                console.log($cookies.id_user)
- 
-              $scope.loggedUserProfile = {
-                nama_user: res.json[0].nama_user,
-                email_user: res.json[0].email_user,
-                no_telp_user: res.json[0].no_telp_user,
-                nama_perusahaan_user: res.json[0].nama_perusahaan_user,
-                alamat_user: res.json[0].alamat_user,
-                nama_cc_user: res.json[0].nama_cc_user,
-                alamat_cc_user: res.json[0].alamat_cc_user,
-                nomor_cc_user: res.json[0].nomor_cc_user,
-                nomor_vcv_user: res.json[0].nomor_vcv_user,
-                expire_month_user: res.json[0].expire_month_cc_user,
-                expire_year_user: res.json[0].expire_year_cc_user
-              }
-          });
-    }
+                 $cookies.nama_user = res.json[0].nama_user;
+                  console.log($cookies.nama_user);
+                  console.log($cookies.id_user)
+   
+                $scope.loggedUserProfile = {
+                  nama_user: res.json[0].nama_user,
+                  email_user: res.json[0].email_user,
+                  no_telp_user: res.json[0].no_telp_user,
+                  nama_perusahaan_user: res.json[0].nama_perusahaan_user,
+                  alamat_user: res.json[0].alamat_user,
+                  nama_cc_user: res.json[0].nama_cc_user,
+                  alamat_cc_user: res.json[0].alamat_cc_user,
+                  nomor_cc_user: res.json[0].nomor_cc_user,
+                  nomor_vcv_user: res.json[0].nomor_vcv_user,
+                  expire_month_user: res.json[0].expire_month_cc_user,
+                  expire_year_user: res.json[0].expire_year_cc_user
+                }
+            });
+    } 
+
+  }
 
   /* * * * * * *  * * * * * * * * * * * * * * * *
     *   Functions used in Edit User Profile     * 
@@ -486,38 +581,45 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
   /* a. Load all the instances belong to the logged user */
   $scope.loadInstance = function() {
 
-    $scope.checkAccess();
+    console.log("Loading instances...");
+    console.log($scope.checkAccess());
+    if( $scope.checkAccess() == true ) {
+      console.log("Passing the access checking, now loading instances..");
+      $scope.dummyUser = { 
+            id_user: $cookies.id_user,
+            token: $cookies.token
+        };
+        console.log("Here are the credentials before POST User Instances.")
+        console.log($scope.dummyUser);
 
-    $scope.dummyUser = { 
-        id_user: $cookies.id_user,
-        token: $cookies.token
-    };
-    console.log("Here are the credentials before POST User Instances.")
-    console.log($scope.dummyUser);
-
-    $http({
-        method: 'POST',
-        url: 'http://localhost:8183/user/instances',
-        data: $.param($scope.dummyUser),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .success(function(data) {
-        for(i=0; i<data.json.length; i++) {
-          $scope.instances.push( {
-            id_instances: data.json[i].id_instances,
-            id_user: data.json[i].id_user,
-            id_plan: data.json[i].id_plan,
-            nama_instance: data.json[i].nama_instance,
-            uuid_vm: data.json[i].uuid_vm,
-            status_pembayaran: data.json[i].status_pembayaran,
-            tanggal: data.json[i].tanggal,
-            started: data.json[i].started,
-            deleted: data.json[i].deleted,
-            selected: false
-          });
-        }; // end of loop
-
-      }); 
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8183/user/instances',
+            data: $.param($scope.dummyUser),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          })
+          .success(function(data) {
+            if(data.json.length == 0) {
+              alert("You don't have any instance yet.");
+              $location.path('/dashboard');
+            } else {
+              for(i=0; i<data.json.length; i++) {
+                $scope.instances.push( {
+                  id_instances: data.json[i].id_instances,
+                  id_user: data.json[i].id_user,
+                  id_plan: data.json[i].id_plan,
+                  nama_instance: data.json[i].nama_instance,
+                  uuid_vm: data.json[i].uuid_vm,
+                  status_pembayaran: data.json[i].status_pembayaran,
+                  tanggal: data.json[i].tanggal,
+                  started: data.json[i].started,
+                  deleted: data.json[i].deleted,
+                  selected: false
+                });
+              }; // end of loop
+            }
+          }); 
+    }
   }
 
   /* b. Load  specific instance info */
@@ -526,7 +628,7 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     $scope.dummyInstance = { 
         id_user: $cookies.id_user,
         token: $cookies.token,
-        uuid_vm: x
+        uuid_vm: x.trim()
     };
     console.log("Here are the credentials before POST Get Info Instances.")
     console.log($scope.dummyInstance);
@@ -539,17 +641,19 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
       })
       .success(function(data) {
           if(z == "ssh") {
+            console.log("It goes here.");
             $scope.selectInstance.nama_instance = y;
             $scope.selectInstance.ssh = data.ip;
             $scope.selectInstance.isSelected = true;
           } else if( z == "all") {
             $scope.resetCookies("VMCookies");
-            $scope.createVMCookies(x,y,data.json[0].tanggal,data.json[0].status_pembayaran,data.json[0].deleted);
+            $scope.createVMCookies(x.trim(),y,data.json[0].tanggal,data.json[0].status_pembayaran,data.json[0].deleted,data.json[0].id_plan);
             console.log($cookies.uuid_vm);
             console.log($cookies.nama_instance);
             console.log($cookies.tanggal);
             console.log($cookies.status_pembayaran);
             console.log($cookies.deleted);
+            console.log($cookies.id_plan);
           }
       });
   }
@@ -571,7 +675,6 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {
-          console.log(data); 
           if(data.result == "success") {
             alert("Instance is successfully started.");
           }
@@ -584,7 +687,7 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
   }
 
   /* d. Stop  specific instance info */
-  $scope.stopInstance = function(x) {
+  $scope.stopInstance = function(x) { 
     
     $scope.dummyInstance = { 
         id_user: $cookies.id_user,
@@ -601,7 +704,14 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {
-          console.log(data); 
+          if(data.result == "success") {
+            alert("Instance has stopped.");
+          }
+          else
+          {
+            alert("Please retry."); 
+          }
+          $window.location.reload(); 
       });
   }
 
@@ -623,7 +733,14 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {
-          console.log(data); 
+          if(data.result == "success") {
+            alert("Instance is restarted.");
+          }
+          else
+          {
+            alert("Please retry."); 
+          }
+          $window.location.reload();
       });
   }
 
@@ -639,13 +756,15 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     }
   }
 
+  /* g. Hide details button */
+
 
    /* * * * * * *  * * * * * * * * * * * * * * * *
     *     Functions used in Add Instance         * 
     * * * * * * * * * * * * * * * * * * * * * *  */
 
    /* a. Get id_plan for custom plan */
-  $scope.checkPlanPrice = function() {
+  $scope.checkPlanPrice = function(x) {
      $http({
         method: 'GET',
         url: 'http://localhost:8183/plan/price_list',
@@ -662,11 +781,37 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
               jumlah_storage: data[0][i].jumlah_storage
             });
           };
-          $scope.infoPlan.nama_plan = (($scope.dummyPlan.cpu).concat($scope.dummyPlan.vram)).concat($scope.dummyPlan.vhdd);
-          $scope.dummyUser.id_plan = $scope.plans[$scope.plans.map(function(x) {return x.nama_plan;}).indexOf($scope.infoPlan.nama_plan)].id_plan;
-          $scope.infoPlan.harga_plan = $scope.plans[($scope.dummyUser.id_plan-1)].harga_plan;
-          $scope.infoPlan.deskripsi_plan = $scope.plans[($scope.dummyUser.id_plan-1)].deskripsi_plan;
-          $scope.infoPlan.toggle = true;
+          if( x == "Add" ) {       
+            console.log("Almost add"); 
+            $scope.infoPlan.nama_plan = (($scope.dummyPlan.cpu).concat($scope.dummyPlan.vram)).concat($scope.dummyPlan.vhdd);
+            $scope.dummyUser.id_plan = $scope.plans[$scope.plans.map(function(x) {return x.nama_plan;}).indexOf($scope.infoPlan.nama_plan)].id_plan;
+            $scope.infoPlan.harga_plan = $scope.plans[($scope.dummyUser.id_plan-1)].harga_plan;
+            $scope.infoPlan.deskripsi_plan = $scope.plans[($scope.dummyUser.id_plan-1)].deskripsi_plan;
+            $scope.infoPlan.toggle = true;
+
+            console.log($scope.infoPlan.nama_plan);          
+            console.log($scope.dummyUser.id_plan);
+          }
+          else if ( x == "Edit" ) {
+            console.log("Its here in editing part.");
+            $scope.infoPlan.nama_plan = (($scope.dummyPlan.cpu).concat($scope.dummyPlan.vram)).concat($scope.dummyPlan.vhdd);
+            $scope.dummyUser.id_plan = $scope.plans[$scope.plans.map(function(x) {return x.nama_plan;}).indexOf($scope.infoPlan.nama_plan)].id_plan; 
+
+            console.log($cookies.id_plan);
+            console.log($scope.dummyUser.id_plan);
+            if ( ($scope.isPlanAllowed($cookies.id_plan, $scope.dummyUser.id_plan)) == false ) {
+                alert("Downgrading plan is not allowed. Please retry.");
+                $location.path("/instance");
+            }
+            else {
+              $scope.infoPlan.harga_plan = $scope.plans[($scope.dummyUser.id_plan-1)].harga_plan;
+              $scope.infoPlan.deskripsi_plan = $scope.plans[($scope.dummyUser.id_plan-1)].deskripsi_plan;
+              $scope.infoPlan.toggle = true;
+            }
+          }
+          console.log("It goes here");
+          console.log($scope.infoPlan.harga_plan);
+
       });
   }
 
@@ -705,16 +850,26 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
 
   /* a. Load Edit Page for selected vm */
 
-
-  /* b. Edit Instance */
-
   $scope.editInstance = function(x,y) {
     $scope.getInfo(x, y, "all");
     $location.path('/instance/edit');
   }
 
+  /* b. Check whether the plan is allowed to be editted */
+
+  $scope.isPlanAllowed = function(x,y) {
+    if(x < y || x == y) {
+      return true;
+    } 
+    else if ( x > y ) {
+      return false;
+    }
+  }
+
+  /* c. Edit Instance */
+
   $scope.callingEditInstanceAPI = function() {
-    
+
     $scope.dummyUser.uuid_vm = $cookies.uuid_vm;
     $scope.dummyUser.nama_instance = $cookies.nama_instance;
     $scope.dummyUser.tanggal = $cookies.tanggal;
@@ -731,9 +886,14 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {
-        $.each(data, function(index) {
-          console.log(JSON.stringify(data[index].msg));
-        })
+        if(data.result == "success") {
+          alert("Data is successfully updated.");
+        } else {
+          $.each(data, function(index) {
+            alert(JSON.stringify(data[index].msg));
+          })
+        }
+        $location.path("/instance");
       });
   }
 

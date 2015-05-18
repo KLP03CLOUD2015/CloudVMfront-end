@@ -90,6 +90,23 @@ module.exports.getInstanceIP = function(uuid,callback)
      });
 };
 
+module.exports.getInstanceMAC = function(name,uuid,callback)
+{
+    cfg.ssh_options.stdout = fs.createWriteStream('./out.txt');
+    cmds=[
+            'xe vif-list device=0 vm-name-label='+name+' params=MAC --minimal'
+        ];
+        rexec(cfg.hosts, cmds, cfg.ssh_options, function(err){
+        if (err) {
+            console.log(err);
+            callback(err);
+        } else {
+            var mac = fs.readFileSync('out.txt','utf8');
+            callback(null,mac,uuid);
+        }
+     });
+};
+
 module.exports.deleteInstance = function(uuid,callback)
 {
     cmds=[

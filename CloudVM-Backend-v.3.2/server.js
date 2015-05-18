@@ -112,7 +112,7 @@ user_register.post(function(req, res, next) {
     req.assert('no_telp', 'Nomor telepon harus diisi dan berisi angka saja').notEmpty();
     req.assert('nama_perusahaan', 'Nama perusahaan harus diisi dan berisikan angka atau huruf saja').notEmpty();
     req.assert('alamat', 'Alamat harus diisi').notEmpty();
-    req.assert('nama_cc', 'Nama pada Kartu Kredit harus diisi').notEmpty().isAlpha();
+    req.assert('nama_cc', 'Nama pada Kartu Kredit harus diisi').notEmpty()
     req.assert('alamat_cc', 'Alamat pada Kartu harus Kredit diisi').notEmpty();
     req.assert('nomor_cc', 'Nomor Kartu harus Kredit diisi').notEmpty().isNumeric();
     req.assert('nomor_vcv', 'Nomor VCV harus diisi').notEmpty().isNumeric().len(3);
@@ -618,10 +618,9 @@ instance_create.post(function(req, res, next) {
 							     },
 							     function(arg2,callback)
 							     {
-                                        console.log("arg2:" + arg2);
 							     	 	var sql = 'INSERT INTO INSTANCES  (id_user,nama_instance,uuid_vm,id_plan,status_pembayaran,deleted,tanggal,started) values("' + id_user + '","' + nama_instance + '","' + arg2.trim()+ '",' + id_plan + ',1,0,NOW(),0)';
 			                            connection.query(sql, function(err, rows, fields) {
-			                                if (err) {
+			                                /*if (err) {
 			                                    console.error(err);
 			                                    res.statuscode = 500;
 			                                    res.send({
@@ -636,10 +635,36 @@ instance_create.post(function(req, res, next) {
 			                                    });
 			                                }
 
-			                                connection.release();
+			                                connection.release();*/
 			                            });
-			                            callback(null);
-							     }
+			                            callback(null,arg2);
+							     },
+                                function(arg3,callback){
+                                   bridge.getInstanceMAC(nama_instance,arg3,callback);
+                                 },
+                                 function(arg4,arg5,callback)
+                                 {
+                                    var sql = 'INSERT INTO ip_flag (mac_address,uuid_vm) values("' + arg4 + '","' + arg5 + '")';
+                                        connection.query(sql, function(err, rows, fields) {
+                                            if (err) {
+                                                console.error(err);
+                                                res.statuscode = 500;
+                                                res.send({
+                                                    result: 'error',
+                                                    err: err.code
+                                                });
+                                            } else {
+                                                res.send({
+                                                    result: 'success',
+                                                    err: '',
+                                                    json: rows
+                                                });
+                                            }
+
+                                            connection.release();
+                                        });
+                                        callback(null);
+                                 }
                                  ]);   
 
 

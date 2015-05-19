@@ -72,19 +72,28 @@ module.exports.getInstanceIP = function(uuid,callback)
             callback(err);
         } else {
             var ipstring = fs.readFileSync('out.txt','utf8');
+            console.log(ipstring);
             var ip = ipstring.split(";");
             console.log(ip)
             var ip2 = ip[0].split(":");
             console.log(ip2)
             var tmp = ip2[1];
             console.log(tmp);
-            var ip_hasil = tmp.trim();
-            console.log(ip_hasil);
-            var ip_split = ip_hasil.split('.');
-            console.log(ip_split[3]);
-            var hostid = parseInt(ip_split[3]);
-            var url_port = 3000 + (hostid-150);
-            var final_address = 'cloudvm2.ddns.net:'+ url_port;
+            if(tmp == undefined)
+            {
+                var final_address = "gagal mendapatkan IP silahkan tunggu sampai vm selesai menyala";
+            }
+            else
+            {
+                var ip_hasil = tmp.trim();
+                console.log(ip_hasil);
+                var ip_split = ip_hasil.split('.');
+                console.log(ip_split[3]);
+                var hostid = parseInt(ip_split[3]);
+                var url_port = 3000 + (hostid-150);
+                var final_address = 'cloudvm2.ddns.net:'+ url_port;
+            }
+
             callback(null,final_address);
         }
      });

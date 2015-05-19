@@ -190,7 +190,7 @@ user_edit.post(function(req, res, next) {
     req.assert('no_telp_user', 'Nomor telepon harus diisi dan berisi angka saja').notEmpty();
     req.assert('nama_perusahaan_user', 'Nama perusahaan harus diisi dan berisikan angka atau huruf saja').notEmpty();
     req.assert('alamat_user', 'Alamat harus diisi').notEmpty();
-    req.assert('nama_cc_user', 'Nama pada Kartu Kredit harus diisi').notEmpty().isAlpha();
+    req.assert('nama_cc_user', 'Nama pada Kartu Kredit harus diisi').notEmpty();
     req.assert('alamat_cc_user', 'Alamat pada Kartu harus Kredit diisi').notEmpty();
     req.assert('nomor_cc_user', 'Nomor Kartu harus Kredit diisi').notEmpty().isNumeric();
     req.assert('nomor_vcv_user', 'Nomor VCV harus diisi').notEmpty().isNumeric().len(3);

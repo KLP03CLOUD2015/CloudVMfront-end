@@ -91,7 +91,15 @@ module.exports.getInstanceIP = function(uuid,callback)
                 console.log(ip_split[3]);
                 var hostid = parseInt(ip_split[3]);
                 var url_port = 3000 + (hostid-150);
-                var final_address = 'cloudvm2.ddns.net:'+ url_port;
+                if(url_port<3000)
+                {
+                    var final_address = "gagal mendapatkan IP silahkan tunggu sampai vm selesai menyala";
+                }
+                else
+                {
+                    var final_address = 'cloudvm2.ddns.net:'+ url_port;
+                }
+
             }
 
             callback(null,final_address);

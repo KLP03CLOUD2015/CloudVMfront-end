@@ -64,8 +64,8 @@
 
      <div class="form-group form-group-lg">
       <div class="alert alert-block alert-warning" ng-show="selectInstance.isSelected" class="hideByDefault">
-          <h4>SSH for {{selectInstance.nama_instance}}: </h4>
-          {{selectInstance.ssh}}
+          <h4>SSH for {{selectInstance.nama_instance}}: <h5>{{selectInstance.ssh}}</h5></h4>
+          Details: {{selectInstance.cpu}} CPU, {{selectInstance.vram}} GB of VRAM, {{selectInstance.vhdd}} GB of VHDD.
           <br/>
           <h5>Default User and Password:</h5>
           <ul>

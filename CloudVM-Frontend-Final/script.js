@@ -652,6 +652,35 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
             $scope.selectInstance.nama_instance = y;
             $scope.selectInstance.ssh = data.ip;
             $scope.selectInstance.isSelected = true;
+            $scope.selectInstance.id_plan = data.json[0].id_plan;
+
+            console.log("Here are price list:");
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8183/plan/price_list',
+              })
+              .success(function(res) {
+                  for(i=0; i<res[0].length; i++) {
+                    $scope.plans.push({
+                      id_plan: res[0][i].id_plan,
+                      nama_plan: res[0][i].nama_plan,
+                      deskripsi_plan: res[0][i].deskripsi_plan,
+                      harga_plan: res[0][i].harga_plan,
+                      jumlah_cpu: res[0][i].jumlah_cpu,
+                      jumlah_memori: res[0][i].jumlah_memori,
+                      jumlah_storage: res[0][i].jumlah_storage
+                    });
+                  };
+
+
+              });
+
+            console.log(data.json[0].id_plan);  
+            $scope.selectInstance.nama_plan = $scope.plans[($scope.selectInstance.id_plan-1)].nama_plan;
+            $scope.selectInstance.vhdd = $scope.selectInstance.nama_plan.substring(5);
+            $scope.selectInstance.vram = $scope.selectInstance.nama_plan.substring(2,1);
+            $scope.selectInstance.cpu = $scope.selectInstance.nama_plan.substring(1,2);
+
           } else if( z == "all") {
             $scope.resetCookies("VMCookies");
             $scope.createVMCookies(x.trim(),y,data.json[0].tanggal,data.json[0].status_pembayaran,data.json[0].deleted,data.json[0].id_plan);
@@ -740,7 +769,7 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .success(function(data) {
-          if(data.result == "success") {
+          if(data.result == "vm_reboot_succeed") {
             alert("Instance is restarted.");
           }
           else

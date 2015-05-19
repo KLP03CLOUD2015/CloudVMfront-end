@@ -574,6 +574,11 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
   $scope.instancesInfo = {};
   $scope.pricings = [];
 
+
+  $scope.hasWhiteSpace = function(s) {
+    return s.indexOf(' ') >= 0;
+  }
+
    /* * * * * * *  * * * * * * * * * * * * * * * *
     *         Functions used in Instance         * 
     * * * * * * * * * * * * * * * * * * * * * *  */
@@ -825,7 +830,11 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
     console.log("Here are the credentials before POST Create Instances.")
     console.log($scope.dummyUser);
 
-    $http({
+    if ( $scope.hasWhiteSpace($scope.dummyUser.nama_instance) == true ) {
+      alert("Instance name cannot contain spaces. Please retry.");
+      $window.location.reload();
+    } else {
+      $http({
         method: 'POST',
         url: 'http://localhost:8183/instance/create',
         data: $.param($scope.dummyUser),
@@ -841,6 +850,9 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
           alert("Please check your data."); 
         }
       });
+    }
+
+    
   }
 
   
@@ -870,31 +882,38 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
 
   $scope.callingEditInstanceAPI = function() {
 
-    $scope.dummyUser.uuid_vm = $cookies.uuid_vm;
-    $scope.dummyUser.nama_instance = $cookies.nama_instance;
-    $scope.dummyUser.tanggal = $cookies.tanggal;
-    $scope.dummyUser.status_pembayaran = $cookies.status_pembayaran;
-    $scope.dummyUser.deleted = $cookies.deleted;
+    if ( $scope.hasWhiteSpace($scope.dummyUser.nama_instance_baru) == true ) {
+      alert("Instance name cannot contain spaces. Please retry.");
+      $window.location.reload();
+    } else {
+      $scope.dummyUser.uuid_vm = $cookies.uuid_vm;
+      $scope.dummyUser.nama_instance = $cookies.nama_instance;
+      $scope.dummyUser.tanggal = $cookies.tanggal;
+      $scope.dummyUser.status_pembayaran = $cookies.status_pembayaran;
+      $scope.dummyUser.deleted = $cookies.deleted;
 
-    console.log("Here are the credentials before POST Edit Instances.")
-    console.log($scope.dummyUser);
+      console.log("Here are the credentials before POST Edit Instances.")
+      console.log($scope.dummyUser);
 
-    $http( {
-        method: 'POST',
-        url: 'http://localhost:8183/instance/edit',
-        data: $.param(($scope.dummyUser)),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .success(function(data) {
-        if(data.result == "success") {
-          alert("Data is successfully updated.");
-        } else {
-          $.each(data, function(index) {
-            alert(JSON.stringify(data[index].msg));
-          })
-        }
-        $location.path("/instance");
-      });
+      $http( {
+          method: 'POST',
+          url: 'http://localhost:8183/instance/edit',
+          data: $.param(($scope.dummyUser)),
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .success(function(data) {
+          if(data.result == "success") {
+            alert("Data is successfully updated.");
+          } else {
+            $.each(data, function(index) {
+              alert(JSON.stringify(data[index].msg));
+            })
+          }
+          $location.path("/instance");
+        });
+    }
+
+   
   }
 
 });

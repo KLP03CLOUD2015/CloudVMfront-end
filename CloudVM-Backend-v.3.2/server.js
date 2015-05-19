@@ -644,7 +644,7 @@ instance_create.post(function(req, res, next) {
                                  },
                                  function(arg4,arg5,callback)
                                  {
-                                    var sql = 'INSERT INTO ip_flag (mac_address,uuid_vm) values("' + arg4 + '","' + arg5 + '")';
+                                    var sql = 'INSERT INTO ip_flag (mac_address,uuid_vm) values("' + arg4 + '","' + arg5.trim() + '")';
                                         connection.query(sql, function(err, rows, fields) {
                                             if (err) {
                                                 console.error(err);

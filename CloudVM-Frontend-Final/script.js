@@ -574,6 +574,8 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
   $scope.instancesInfo = {};
   $scope.pricings = [];
 
+  $scope.dummyPL = {};
+
 
   $scope.hasWhiteSpace = function(s) {
     return s.indexOf(' ') >= 0;
@@ -799,6 +801,11 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
           }
           else if ( x == "Edit" ) {
             console.log("Its here in editing part.");
+            $scope.dummyPL.nama_plan = $scope.plans[$cookies.id_plan-1].nama_plan;
+            console.log("The instance previous plan is: " + $scope.dummyPL.nama_plan);
+            $scope.dummyPlan.vhdd = $scope.dummyPL.nama_plan.substring(4);
+
+
             $scope.infoPlan.nama_plan = (($scope.dummyPlan.cpu).concat($scope.dummyPlan.vram)).concat($scope.dummyPlan.vhdd);
             $scope.dummyUser.id_plan = $scope.plans[$scope.plans.map(function(x) {return x.nama_plan;}).indexOf($scope.infoPlan.nama_plan)].id_plan; 
 
@@ -819,9 +826,8 @@ myApp.controller("UserController", function($scope, $http, $location, $cookies, 
 
       });
   }
-
   
-  /* b. Create Instance */
+  /* c. Create Instance */
   $scope.createInstance = function() {
     // $scope.dummyUser = { 
     //     id_user: $cookies.id_user,
